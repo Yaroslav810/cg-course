@@ -3,6 +3,7 @@ const letters = document.getElementById('svg').querySelectorAll('g')
 const DELAY = 300
 const G = 10
 const V0 = 100
+const PING = 100
 
 function animation(letter) {
     let start = performance.now()
@@ -10,7 +11,7 @@ function animation(letter) {
     let v = V0
 
     requestAnimationFrame(function animate(time) {
-        const timestamp = (time - start) / 100
+        const timestamp = (time - start) / PING
 
         if (h < 0) {
             start = performance.now()
