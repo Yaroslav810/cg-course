@@ -8,7 +8,6 @@ const PING = 100
 function animation(letter) {
     let start = performance.now()
     let h = 0
-    let v = V0
 
     requestAnimationFrame(function animate(time) {
         const timestamp = (time - start) / PING
@@ -16,12 +15,10 @@ function animation(letter) {
         if (h < 0) {
             start = performance.now()
             h = 0
-            v = V0
         }
 
         letter.style.transform = `translateY(${-h}px)`
         h = V0 * timestamp - G * timestamp * timestamp / 2
-        v = V0 - G * timestamp
 
         requestAnimationFrame(animate)
     })
