@@ -7,6 +7,13 @@ body {
     padding: 0;
 }
 
+.buttons {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 .buttons,
 .content {
     background: #D3D3D3;
@@ -21,9 +28,11 @@ body {
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-.hidden-input {
+.hidden-input,
+.hidden-link {
     display: none;
 }
 

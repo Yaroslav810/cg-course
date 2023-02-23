@@ -38,7 +38,10 @@ function initButton(input, ctx, openNewModal, openSaveModal) {
 function initCanvas(canvas) {
     canvas.width = CANVAS_WIDTH
     canvas.height = CANVAS_HEIGHT
-    return canvas.getContext('2d')
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    return ctx
 }
 
 function initMouseDraw(canvas, ctx) {
@@ -79,11 +82,50 @@ function initMouseDraw(canvas, ctx) {
     canvas.addEventListener('mouseup', onMouseUp)
 }
 
-function initModal() {
+function initNewModal(canvas, onCloseModal) {
+    const newModal = document.getElementById('new-modal')
+    const widthField = document.getElementById('width-input')
+    const heightField = document.getElementById('height-input')
+
+    widthField.value = CANVAS_WIDTH
+    heightField.value = CANVAS_HEIGHT
+
+    newModal
+        .getElementsByClassName('cancel-button')[0]
+        .addEventListener('click', onCloseModal)
+    newModal
+        .getElementsByClassName('save-button')[0]
+        .addEventListener('click', event => {
+            canvas.width = widthField.value.trim() || CANVAS_WIDTH
+            canvas.height = heightField.value.trim() || CANVAS_HEIGHT
+            onCloseModal(event)
+        })
+}
+
+function initSaveModal(canvas, onCloseModal) {
+    const saveModal = document.getElementById('save-modal')
+    const link = document.getElementById('link')
+    const types = saveModal.getElementsByTagName('input')
+
+    saveModal
+        .getElementsByClassName('cancel-button')[0]
+        .addEventListener('click', onCloseModal)
+    saveModal
+        .getElementsByClassName('save-button')[0]
+        .addEventListener('click', event => {
+            const type = Array.from(types).find(t => t.checked)
+            if (type) {
+                link.download = `image.${type.value}`
+                link.href = canvas.toDataURL(`image/${type.value}`)
+                link.click()
+                onCloseModal(event)
+            }
+        })
+}
+
+function initModal(canvas) {
     const modalOverflow = document.getElementById('overflow')
     const modal = document.getElementById('modal')
-    const newModal = document.getElementById('new-modal')
-    const saveModal = document.getElementById('save-modal')
 
     function onCloseModal(event) {
         event.preventDefault()
@@ -93,12 +135,9 @@ function initModal() {
 
     modal.addEventListener('click', event => event.stopPropagation())
     modalOverflow.addEventListener('click', () => modalOverflow.classList.remove(SHOW_MODAL))
-    newModal
-        .getElementsByClassName('cancel-button')[0]
-        .addEventListener('click', onCloseModal)
-    saveModal
-        .getElementsByClassName('cancel-button')[0]
-        .addEventListener('click', onCloseModal)
+
+    initNewModal(canvas, onCloseModal)
+    initSaveModal(canvas, onCloseModal)
 
     return {
         openNewModal: () => {
@@ -117,7 +156,7 @@ function start () {
     const canvas = document.getElementById('canvas')
 
     const ctx = initCanvas(canvas)
-    const {openNewModal, openSaveModal} = initModal()
+    const {openNewModal, openSaveModal} = initModal(canvas)
     initButton(input, ctx, openNewModal, openSaveModal)
     initMouseDraw(canvas, ctx)
 }
