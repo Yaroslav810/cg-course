@@ -96,6 +96,8 @@ function initMouseDraw(canvas, ctx) {
         ctx.beginPath()
         const {x, y} = coordinateCorrection(event.pageX, event.pageY)
         ctx.moveTo(x, y)
+        ctx.lineTo(x + 1, y + 1)
+        ctx.stroke()
     }
 
     function onMouseMove(event) {
