@@ -11,6 +11,7 @@ body {
     padding-top: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
 }
 
@@ -29,6 +30,28 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.black {
+    background: #000000;
+}
+
+.red {
+    background: #FF0000;
+}
+
+.green {
+    background: #00FF00;
+}
+
+.blue {
+    background: #0000FF;
 }
 
 .hidden-input,

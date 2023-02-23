@@ -6,6 +6,18 @@ const MODAL_ATTRIBUTE = 'data'
 const NEW_MODAL = 'new-modal'
 const SAVE_MODAL = 'save-modal'
 
+function initColors(ctx) {
+    const black = document.getElementById('black')
+    const red = document.getElementById('red')
+    const green = document.getElementById('green')
+    const blue = document.getElementById('blue')
+
+    black.addEventListener('click', () => ctx.strokeStyle = '#000000')
+    red.addEventListener('click', () => ctx.strokeStyle = '#FF0000')
+    green.addEventListener('click', () => ctx.strokeStyle = '#00FF00')
+    blue.addEventListener('click', () => ctx.strokeStyle = '#0000FF')
+}
+
 function initButton(input, ctx, openNewModal, openSaveModal) {
     const newButton = document.getElementById('new')
     const openButton = document.getElementById('open')
@@ -28,6 +40,8 @@ function initButton(input, ctx, openNewModal, openSaveModal) {
             image.onload = () => ctx.drawImage(image, 0, 0)
         }
     }
+
+    initColors(ctx)
 
     newButton.addEventListener('click', openNewModal)
     openButton.addEventListener('click', onOpen)
