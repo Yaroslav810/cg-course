@@ -1,21 +1,18 @@
 const CANVAS_WIDTH = 800
 const CANVAS_HEIGHT = 600
 
-function initButton(input, ctx) {
+const SHOW_MODAL = 'show'
+const MODAL_ATTRIBUTE = 'data'
+const NEW_MODAL = 'new-modal'
+const SAVE_MODAL = 'save-modal'
+
+function initButton(input, ctx, openNewModal, openSaveModal) {
     const newButton = document.getElementById('new')
     const openButton = document.getElementById('open')
     const saveButton = document.getElementById('save')
 
-    function onNew() {
-        console.log('new')
-    }
-
     function onOpen() {
         input.click()
-    }
-
-    function onSave() {
-        console.log('save')
     }
 
     function onFileChange(event) {
@@ -32,9 +29,9 @@ function initButton(input, ctx) {
         }
     }
 
-    newButton.addEventListener('click', onNew)
+    newButton.addEventListener('click', openNewModal)
     openButton.addEventListener('click', onOpen)
-    saveButton.addEventListener('click', onSave)
+    saveButton.addEventListener('click', openSaveModal)
     input.addEventListener('change', onFileChange)
 }
 
@@ -82,12 +79,46 @@ function initMouseDraw(canvas, ctx) {
     canvas.addEventListener('mouseup', onMouseUp)
 }
 
+function initModal() {
+    const modalOverflow = document.getElementById('overflow')
+    const modal = document.getElementById('modal')
+    const newModal = document.getElementById('new-modal')
+    const saveModal = document.getElementById('save-modal')
+
+    function onCloseModal(event) {
+        event.preventDefault()
+        modalOverflow.classList.remove(SHOW_MODAL)
+        modalOverflow.removeAttribute(MODAL_ATTRIBUTE)
+    }
+
+    modal.addEventListener('click', event => event.stopPropagation())
+    modalOverflow.addEventListener('click', () => modalOverflow.classList.remove(SHOW_MODAL))
+    newModal
+        .getElementsByClassName('cancel-button')[0]
+        .addEventListener('click', onCloseModal)
+    saveModal
+        .getElementsByClassName('cancel-button')[0]
+        .addEventListener('click', onCloseModal)
+
+    return {
+        openNewModal: () => {
+            modalOverflow.classList.add(SHOW_MODAL)
+            modalOverflow.setAttribute(MODAL_ATTRIBUTE, NEW_MODAL)
+        },
+        openSaveModal: () => {
+            modalOverflow.classList.add(SHOW_MODAL)
+            modalOverflow.setAttribute(MODAL_ATTRIBUTE, SAVE_MODAL)
+        },
+    }
+}
+
 function start () {
     const input = document.getElementById('input')
     const canvas = document.getElementById('canvas')
 
     const ctx = initCanvas(canvas)
-    initButton(input, ctx)
+    const {openNewModal, openSaveModal} = initModal()
+    initButton(input, ctx, openNewModal, openSaveModal)
     initMouseDraw(canvas, ctx)
 }
 

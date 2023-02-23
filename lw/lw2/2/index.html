@@ -12,10 +12,47 @@
         <button class="button" id="new">New</button>
         <button class="button" id="open">Open</button>
         <button class="button" id="save">Save us</button>
-        <input type="file" id="input" class="input" />
+        <input type="file" id="input" class="hidden-input" />
     </div>
     <div class="content">
         <canvas id="canvas" class="canvas"></canvas>
+    </div>
+    <div class="modal-overflow" id="overflow">
+        <div class="modal" id="modal">
+            <div class="new-modal" id="new-modal">
+                <div>
+                    <label for="width-input">Ширина: </label>
+                    <input type="number" id="width-input" class="input" />
+                </div>
+                <div>
+                    <label for="height-input">Высота: </label>
+                    <input type="number" id="height-input" class="input" />
+                </div>
+                <div class="buttons-modal">
+                    <button class="button">Сохранить</button>
+                    <button class="button cancel-button">Отмена</button>
+                </div>
+            </div>
+            <div class="save-modal" id="save-modal">
+                <div>
+                    <input type="radio" id="png-field" name="type" />
+                    <label for="png-field">PNG</label>
+                </div>
+                <div>
+                    <input type="radio" id="jpeg-field" name="type" />
+                    <label for="jpeg-field">JPEG</label>
+                </div>
+                <div>
+                    <input type="radio" id="bmp-field" name="type" />
+                    <label for="bmp-field">BMP</label>
+                </div>
+
+                <div class="buttons-modal">
+                    <button class="button">Сохранить</button>
+                    <button class="button cancel-button">Отмена</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

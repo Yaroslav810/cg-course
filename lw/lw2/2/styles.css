@@ -23,7 +23,7 @@ body {
     cursor: pointer;
 }
 
-.input {
+.hidden-input {
     display: none;
 }
 
@@ -43,4 +43,56 @@ body {
 
 .canvas {
     background: #FFFFFF;
+}
+
+.modal-overflow {
+    display: none;
+}
+
+.modal-overflow.show {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    margin: 0 auto;
+    width: 400px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: 30px;
+}
+
+.new-modal,
+.save-modal {
+    display: none;
+}
+
+.modal-overflow[data='new-modal'] .new-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-overflow[data='save-modal'] .save-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons-modal {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input {
+    width: 100%;
 }
