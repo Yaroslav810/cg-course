@@ -5,17 +5,40 @@ const SHOW_MODAL = 'show'
 const MODAL_ATTRIBUTE = 'data'
 const NEW_MODAL = 'new-modal'
 const SAVE_MODAL = 'save-modal'
+const COLOR_ATTRIBUTE = 'color'
+const COLOR = {
+    BLACK: 'black',
+    RED: 'red',
+    GREEN: 'green',
+    BLUE: 'blue',
+}
+
 
 function initColors(ctx) {
+    const buttons = document.getElementById('buttons')
     const black = document.getElementById('black')
     const red = document.getElementById('red')
     const green = document.getElementById('green')
     const blue = document.getElementById('blue')
 
-    black.addEventListener('click', () => ctx.strokeStyle = '#000000')
-    red.addEventListener('click', () => ctx.strokeStyle = '#FF0000')
-    green.addEventListener('click', () => ctx.strokeStyle = '#00FF00')
-    blue.addEventListener('click', () => ctx.strokeStyle = '#0000FF')
+    buttons.setAttribute(COLOR_ATTRIBUTE, COLOR.BLACK)
+
+    black.addEventListener('click', () => {
+        ctx.strokeStyle = '#000000'
+        buttons.setAttribute(COLOR_ATTRIBUTE, COLOR.BLACK)
+    })
+    red.addEventListener('click', () => {
+        ctx.strokeStyle = '#FF0000'
+        buttons.setAttribute(COLOR_ATTRIBUTE, COLOR.RED)
+    })
+    green.addEventListener('click', () => {
+        ctx.strokeStyle = '#00FF00'
+        buttons.setAttribute(COLOR_ATTRIBUTE, COLOR.GREEN)
+    })
+    blue.addEventListener('click', () => {
+        ctx.strokeStyle = '#0000FF'
+        buttons.setAttribute(COLOR_ATTRIBUTE, COLOR.BLUE)
+    })
 }
 
 function initButton(input, ctx, openNewModal, openSaveModal) {

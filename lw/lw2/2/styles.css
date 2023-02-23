@@ -54,6 +54,13 @@ body {
     background: #0000FF;
 }
 
+.buttons[color='black'] .black,
+.buttons[color='red'] .red,
+.buttons[color='green'] .green,
+.buttons[color='blue'] .blue {
+    border-radius: 25%;
+}
+
 .hidden-input,
 .hidden-link {
     display: none;
