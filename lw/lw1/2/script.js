@@ -25,3 +25,5 @@ function onMouseDown() {
 }
 
 house.addEventListener('mousedown', onMouseDown)
+
+// TODO: Добавить домики
