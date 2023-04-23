@@ -41,7 +41,7 @@ function initColors(ctx) {
     })
 }
 
-function initButton(input, ctx, openNewModal, openSaveModal) {
+function initButton(input, canvas, ctx, openNewModal, openSaveModal) {
     const newButton = document.getElementById('new')
     const openButton = document.getElementById('open')
     const saveButton = document.getElementById('save')
@@ -60,7 +60,11 @@ function initButton(input, ctx, openNewModal, openSaveModal) {
         if (file) {
             const image = new Image()
             image.src = URL.createObjectURL(file)
-            image.onload = () => ctx.drawImage(image, 0, 0)
+            image.onload = () => {
+                canvas.width = image.naturalWidth
+                canvas.height = image.naturalHeight
+                ctx.drawImage(image, 0, 0)
+            }
         }
     }
 
@@ -121,7 +125,7 @@ function initMouseDraw(canvas, ctx) {
     canvas.addEventListener('mouseup', onMouseUp)
 }
 
-function initNewModal(canvas, onCloseModal) {
+function initNewModal(canvas, ctx, onCloseModal) {
     const newModal = document.getElementById('new-modal')
     const widthField = document.getElementById('width-input')
     const heightField = document.getElementById('height-input')
@@ -137,6 +141,8 @@ function initNewModal(canvas, onCloseModal) {
         .addEventListener('click', event => {
             canvas.width = widthField.value.trim() || CANVAS_WIDTH
             canvas.height = heightField.value.trim() || CANVAS_HEIGHT
+            ctx.fillStyle = '#FFFFFF'
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
             onCloseModal(event)
         })
 }
@@ -162,7 +168,7 @@ function initSaveModal(canvas, onCloseModal) {
         })
 }
 
-function initModal(canvas) {
+function initModal(canvas, ctx) {
     const modalOverflow = document.getElementById('overflow')
     const modal = document.getElementById('modal')
 
@@ -175,7 +181,7 @@ function initModal(canvas) {
     modal.addEventListener('click', event => event.stopPropagation())
     modalOverflow.addEventListener('click', () => modalOverflow.classList.remove(SHOW_MODAL))
 
-    initNewModal(canvas, onCloseModal)
+    initNewModal(canvas, ctx, onCloseModal)
     initSaveModal(canvas, onCloseModal)
 
     return {
@@ -195,8 +201,8 @@ function start () {
     const canvas = document.getElementById('canvas')
 
     const ctx = initCanvas(canvas)
-    const {openNewModal, openSaveModal} = initModal(canvas)
-    initButton(input, ctx, openNewModal, openSaveModal)
+    const {openNewModal, openSaveModal} = initModal(canvas, ctx)
+    initButton(input, canvas, ctx, openNewModal, openSaveModal)
     initMouseDraw(canvas, ctx)
 }
 
