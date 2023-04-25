@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { DragControls } from 'three/addons/controls/DragControls.js'
 
 const CAMERA = {
     FOV: 125,
@@ -42,23 +43,40 @@ function getPoint(v) {
     return point
 }
 
-function getPoints({v1, v2}) {
+function getPoints({v0, v1, v2, v3}) {
     return [
-        getPoint(v1),
-        getPoint(v2),
+        {
+            point: v0,
+            mesh: getPoint(v0),
+        },
+        {
+            point: v1,
+            mesh: getPoint(v1),
+        },
+        {
+            point: v2,
+            mesh: getPoint(v2),
+        },
+        {
+            point: v3,
+            mesh: getPoint(v3),
+        },
     ]
 }
 
 function draw(scene, data) {
     scene.clear()
+    data.forEach(item => scene.add(item))
+}
 
-    const curveObject = getCubicBezierCurve(data)
-    const connectingLines = getConnectingLines(data)
-    const points = getPoints(data)
-
-    scene.add(curveObject)
-    scene.add(connectingLines)
-    scene.add(...points)
+function initListeners(camera, renderer, points) {
+    points.forEach( ({ point, mesh }) => {
+        const controls = new DragControls( [mesh], camera, renderer.domElement )
+        controls.addEventListener( 'drag', event => {
+            point.x = event.object.position.x
+            point.y = event.object.position.y
+        } )
+    } )
 }
 
 function animation(scene, camera, renderer) {
@@ -68,8 +86,13 @@ function animation(scene, camera, renderer) {
         v2: { x: 40, y: 100 },
         v3: { x: 80, y: 0 },
     }
+    let points = getPoints(data)
+    initListeners(camera, renderer, points)
+
     requestAnimationFrame(function animate() {
-        draw(scene, data)
+        const curveObject = getCubicBezierCurve(data)
+        const connectingLines = getConnectingLines(data)
+        draw(scene, [curveObject, connectingLines, ...points.map(p => p.mesh)])
         renderer.render(scene, camera)
         requestAnimationFrame(animate)
     })
