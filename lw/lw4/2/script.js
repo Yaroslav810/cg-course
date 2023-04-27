@@ -7,6 +7,9 @@ const CAMERA = {
     MAX: 500,
 }
 
+// TODO: Изучить как работает Tor, местоположение точек
+// TODO: Сделать 8
+
 function createTorusGeometry() {
     const geometry = new THREE.TorusGeometry( 10, 3, 16, 100)
     const material = new THREE.MeshPhongMaterial( {

@@ -247,8 +247,11 @@ function initListeners(camera, renderer, shapes) {
 
 function animation(scene, camera, renderer) {
     const shapes = getShapes(scene)
+    const shapes2 = getShapes(scene) // TODO
     initListeners(camera, renderer, shapes)
+    initListeners(camera, renderer, shapes2) // TODO
     scene.add( ...shapes )
+    scene.add( ...shapes2 ) // TODO
     requestAnimationFrame(function animate() {
         renderer.render(scene, camera)
         requestAnimationFrame(animate)

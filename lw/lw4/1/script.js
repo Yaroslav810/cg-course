@@ -7,6 +7,9 @@ const CAMERA = {
     MAX: 500,
 }
 
+// TODO: Каждая грань - свой цвет
+// TODO: Крош - 2 штуки + scale
+
 function createIcosahedronGeometry() {
     const geometry = new THREE.IcosahedronGeometry(10)
     const material = new THREE.MeshNormalMaterial({})
