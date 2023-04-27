@@ -86,7 +86,7 @@ function animation(scene, camera, renderer) {
         v2: { x: 40, y: 100 },
         v3: { x: 80, y: 0 },
     }
-    let points = getPoints(data)
+    const points = getPoints(data)
     initListeners(camera, renderer, points)
 
     requestAnimationFrame(function animate() {
