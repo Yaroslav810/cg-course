@@ -30,6 +30,21 @@ function getSkyTexture() {
     return textureLoader.load('./assets/sky.jpg')
 }
 
+function getMainDoorTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    return textureLoader.load('./assets/mainDoor.jpg')
+}
+
+function getVerandaDoorTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    return textureLoader.load('./assets/verandaDoor.jpg')
+}
+
+function getGatesTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    return textureLoader.load('./assets/gates.jpg')
+}
+
 function getRoofTexture() {
     const textureLoader = new THREE.TextureLoader()
     const texture = textureLoader.load('./assets/roof.jpg')
@@ -154,15 +169,54 @@ function createVeranda() {
     ]
 }
 
+function createMainDoor() {
+    const door = new THREE.Mesh(
+        new THREE.BoxGeometry(0.5, 1, 1 / 16),
+        new THREE.MeshPhongMaterial({
+            map: getMainDoorTexture(),
+        })
+    )
+    door.position.set(-1, 1 / 2, 2)
+    return door
+}
+
+function createVerandaDoor() {
+    const door = new THREE.Mesh(
+        new THREE.BoxGeometry(1 / 16, 0.75, 1.5),
+        new THREE.MeshPhongMaterial({
+            map: getVerandaDoorTexture(),
+        })
+    )
+    door.position.set(2, 2 + 0.75 / 2, 0.5)
+    return door
+}
+
+function createGates() {
+    const door = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 1 / 16),
+        new THREE.MeshPhongMaterial({
+            map: getGatesTexture(),
+        })
+    )
+    door.position.set(3.5, 1 / 2, 2)
+    return door
+}
+
 function createHouse() {
     const house = new THREE.Group()
 
     const walls = createWalls()
     const roofs = createRoofs()
     const veranda = createVeranda()
+    const mainDoor = createMainDoor()
+    const verandaDoor = createVerandaDoor()
+    const gates = createGates()
     house.add( ...walls )
     house.add( ...roofs )
     house.add( ...veranda )
+    house.add( mainDoor )
+    house.add( verandaDoor )
+    house.add( gates )
 
     return house
 }
