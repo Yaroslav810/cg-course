@@ -7,10 +7,40 @@ const CAMERA = {
     MAX: 500,
 }
 
+function getHouseTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/house.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(5, 5)
+    return texture
+}
+
+function getGrassTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/grass.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(5, 5)
+    return texture
+}
+
+function getVerandaMaterialSettings() {
+    return {
+        color: '#D5713F',
+        opacity: 0.4,
+        transparent: true,
+    }
+}
+
 function createWall1() {
+
     const wall = new THREE.Mesh(
         new THREE.BoxGeometry(4, 3, 4),
-        new THREE.MeshPhongMaterial({color: '#D5713F'})
+        new THREE.MeshPhongMaterial({
+            map: getHouseTexture(),
+            color: '#D5713F'
+        })
     )
     wall.position.y = 3 / 2
     return wall
@@ -18,10 +48,13 @@ function createWall1() {
 
 function createWall2() {
     const wall = new THREE.Mesh(
-        new THREE.BoxGeometry(4, 2, 3),
-        new THREE.MeshPhongMaterial({color: '#D5713F'})
+        new THREE.BoxGeometry(3, 2, 3),
+        new THREE.MeshPhongMaterial({
+            map: getHouseTexture(),
+            color: '#D5713F'
+        })
     )
-    wall.position.set(3, 2 / 2, 0.5)
+    wall.position.set(3.5, 2 / 2, 0.5)
     return wall
 }
 
@@ -51,7 +84,7 @@ function createRoofs() {
 function createVeranda1() {
     const veranda = new THREE.Mesh(
         new THREE.BoxGeometry(3, 0.5, 1 / 16),
-        new THREE.MeshPhongMaterial({color: '#D5713F'})
+        new THREE.MeshPhongMaterial(getVerandaMaterialSettings())
     )
     veranda.position.set(3.5, 1.25 + 2 / 2, 2 - 1 / 32)
     return veranda
@@ -60,7 +93,7 @@ function createVeranda1() {
 function createVeranda2() {
     const veranda = new THREE.Mesh(
         new THREE.BoxGeometry(1 / 16, 0.5, 3),
-        new THREE.MeshPhongMaterial({color: '#D5713F'})
+        new THREE.MeshPhongMaterial(getVerandaMaterialSettings())
     )
     veranda.position.set(5 - 1 / 32, 1.25 + 2 / 2, 0.5)
     return veranda
@@ -69,7 +102,7 @@ function createVeranda2() {
 function createVeranda3() {
     const veranda = new THREE.Mesh(
         new THREE.BoxGeometry(3, 0.5, 1 / 16),
-        new THREE.MeshPhongMaterial({color: '#D5713F'})
+        new THREE.MeshPhongMaterial(getVerandaMaterialSettings())
     )
     veranda.position.set(3.5, 1.25 + 2 / 2, -1 + 1 / 32)
     return veranda
@@ -99,7 +132,10 @@ function createHouse() {
 function createGround() {
     const ground = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 20),
-        new THREE.MeshPhongMaterial({color: 0xa9c388})
+        new THREE.MeshPhongMaterial({
+            map: getGrassTexture(),
+            color: '#a9c388',
+        })
     )
     ground.rotation.x = -Math.PI * 0.5
     ground.position.y = 0
@@ -174,7 +210,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 10, -200 )
+    camera.position.set( 0, 10, 200 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     // renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
