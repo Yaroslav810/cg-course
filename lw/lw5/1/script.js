@@ -212,7 +212,6 @@ function animation(scene, camera, renderer) {
     controls.autoRotate = true
     scene.add(...createAllLight())
     scene.add(createScene())
-    scene.background = getSkyTexture()
 
     requestAnimationFrame(function animate() {
         controls.update()
@@ -230,6 +229,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
+    scene.background = getSkyTexture()
     camera.position.set( 0, 10, 250 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     document.body.appendChild( renderer.domElement )
