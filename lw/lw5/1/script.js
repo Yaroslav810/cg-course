@@ -4,7 +4,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls";
 const CAMERA = {
     FOV: 3,
     MIN: 1,
-    MAX: 500,
+    MAX: 5000,
 }
 
 function getHouseTexture() {
@@ -21,8 +21,13 @@ function getGrassTexture() {
     const texture = textureLoader.load('./assets/grass.jpg')
     texture.wrapS = THREE.RepeatWrapping
     texture.wrapT = THREE.RepeatWrapping
-    texture.repeat.set(5, 5)
+    texture.repeat.set(30, 30)
     return texture
+}
+
+function getSkyTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    return textureLoader.load('./assets/sky.jpg')
 }
 
 function getRoofTexture() {
@@ -143,7 +148,7 @@ function createHouse() {
 
 function createGround() {
     const ground = new THREE.Mesh(
-        new THREE.PlaneGeometry(20, 20),
+        new THREE.PlaneGeometry(50, 50),
         new THREE.MeshPhongMaterial({
             map: getGrassTexture(),
             color: '#a9c388',
@@ -203,8 +208,11 @@ function createAllLight() {
 
 function animation(scene, camera, renderer) {
     const controls = new OrbitControls(camera, renderer.domElement)
+    controls.maxPolarAngle = Math.PI * 0.49
+    controls.autoRotate = true
     scene.add(...createAllLight())
     scene.add(createScene())
+    scene.background = getSkyTexture()
 
     requestAnimationFrame(function animate() {
         controls.update()
@@ -222,9 +230,8 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 10, 200 )
+    camera.position.set( 0, 10, 250 )
     renderer.setSize( window.innerWidth, window.innerHeight )
-    // renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
 
     animation(scene, camera, renderer)
