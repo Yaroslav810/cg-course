@@ -156,25 +156,25 @@ function createLight() {
 }
 
 function createPointLight1() {
-    const light = new THREE.PointLight('#ffffff', 1, 5)
-    light.position.set( -1, 3, -2.2)
+    const light = new THREE.PointLight('#ffffff', 1, 10)
+    light.position.set( -1, 3, -2.5)
     return light
 }
 
 function createPointLight2() {
-    const light = new THREE.PointLight('#ffffff', 1, 5)
+    const light = new THREE.PointLight('#ffffff', 1, 10)
     light.position.set( 1, 3, -2.3)
     return light
 }
 
 function createPointLight3() {
-    const light = new THREE.PointLight('#ffffff', 1, 5)
+    const light = new THREE.PointLight('#ffffff', 1, 10)
     light.position.set( -2.2, 3, -1)
     return light
 }
 
 function createPointLight4() {
-    const light = new THREE.PointLight('#ffffff', 1, 5)
+    const light = new THREE.PointLight('#ffffff', 1, 10)
     light.position.set( -2.2, 3, 1)
     return light
 }
@@ -210,7 +210,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 10, 200 )
+    camera.position.set( 0, 10, -200 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     // renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
