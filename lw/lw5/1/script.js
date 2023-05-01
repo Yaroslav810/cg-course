@@ -39,6 +39,15 @@ function getRoofTexture() {
     return texture
 }
 
+function getFloorTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/floor.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(10, 10)
+    return texture
+}
+
 function getVerandaMaterialSettings() {
     return {
         color: '#D5713F',
@@ -125,11 +134,23 @@ function createVeranda3() {
     return veranda
 }
 
+function createFloor() {
+    const floor = new THREE.Mesh(
+        new THREE.BoxGeometry(3, 1 / 8, 3),
+        new THREE.MeshPhongMaterial({
+            map: getFloorTexture(),
+        })
+    )
+    floor.position.set(3.5, 2 - 1 / 18, 0.5)
+    return floor
+}
+
 function createVeranda() {
     return [
         createVeranda1(),
         createVeranda2(),
         createVeranda3(),
+        createFloor(),
     ]
 }
 
