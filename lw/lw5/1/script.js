@@ -119,9 +119,43 @@ function createLight() {
     return light
 }
 
+function createPointLight1() {
+    const light = new THREE.PointLight('#ffffff', 1, 5)
+    light.position.set( -1, 3, -2.2)
+    return light
+}
+
+function createPointLight2() {
+    const light = new THREE.PointLight('#ffffff', 1, 5)
+    light.position.set( 1, 3, -2.3)
+    return light
+}
+
+function createPointLight3() {
+    const light = new THREE.PointLight('#ffffff', 1, 5)
+    light.position.set( -2.2, 3, -1)
+    return light
+}
+
+function createPointLight4() {
+    const light = new THREE.PointLight('#ffffff', 1, 5)
+    light.position.set( -2.2, 3, 1)
+    return light
+}
+
+function createAllLight() {
+    return [
+        createLight(),
+        createPointLight1(),
+        createPointLight2(),
+        createPointLight3(),
+        createPointLight4(),
+    ]
+}
+
 function animation(scene, camera, renderer) {
     const controls = new OrbitControls(camera, renderer.domElement)
-    scene.add(createLight())
+    scene.add(...createAllLight())
     scene.add(createScene())
 
     requestAnimationFrame(function animate() {
@@ -140,7 +174,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 10, 200 )
+    camera.position.set( 0, 10, -200 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     // renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
