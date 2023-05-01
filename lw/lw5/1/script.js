@@ -25,6 +25,15 @@ function getGrassTexture() {
     return texture
 }
 
+function getRoofTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/roof.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(10, 10)
+    return texture
+}
+
 function getVerandaMaterialSettings() {
     return {
         color: '#D5713F',
@@ -68,7 +77,10 @@ function createWalls() {
 function createRoof1() {
     const roof = new THREE.Mesh(
         new THREE.ConeGeometry(3.5, 2, 4),
-        new THREE.MeshPhongMaterial({color: '#ac8e82'})
+        new THREE.MeshPhongMaterial({
+            map: getRoofTexture(),
+            color: '#ac8e82',
+        })
     )
     roof.position.y = 3 + 2 / 2
     roof.rotation.y = Math.PI / 4
@@ -210,7 +222,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 10, -200 )
+    camera.position.set( 0, 10, 200 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     // renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
