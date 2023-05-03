@@ -504,22 +504,14 @@ function createFence() {
 function createHouse() {
     const house = new THREE.Group()
 
-    const walls = createWalls()
-    const roofs = createRoofs()
-    const veranda = createVeranda()
-    const mainDoor = createMainDoor()
-    const verandaDoor = createVerandaDoor()
-    const gates = createGates()
-    const windows = createWindows()
-    const porch = createPorch()
-    house.add( ...walls )
-    house.add( ...roofs )
-    house.add( ...veranda )
-    house.add( ...windows )
-    house.add( mainDoor )
-    house.add( verandaDoor )
-    house.add( gates )
-    house.add( porch )
+    house.add(...createWalls())
+    house.add(...createRoofs())
+    house.add(...createVeranda())
+    house.add(...createWindows())
+    house.add(createMainDoor())
+    house.add(createVerandaDoor())
+    house.add(createGates())
+    house.add(createPorch())
 
     return house
 }
@@ -540,7 +532,7 @@ function createGround() {
 function createBushMesh(r, x, y, z) {
     const bush = new THREE.Mesh(
         new THREE.SphereGeometry(r, 32, 16),
-        new THREE.MeshBasicMaterial({
+        new THREE.MeshPhongMaterial({
             map: getBushTexture(),
         })
     )
@@ -559,12 +551,55 @@ function createBush() {
     return bush
 }
 
+function createFlashlight(x, y, z) {
+    const flashLight = new THREE.Object3D
+
+    const support = new THREE.Mesh(
+        new THREE.CylinderGeometry( 0.05, 0.05, 2, 16 ),
+        new THREE.MeshBasicMaterial({
+            color: '#36170a',
+        })
+    )
+    support.position.set(x, y, z)
+    const bend = new THREE.Mesh(
+        new THREE.BoxGeometry(0.1, 1 / 8, 0.38),
+        new THREE.MeshPhongMaterial({
+            color: '#36170a',
+        })
+    )
+    bend.position.set(x, y + 1, z + 0.15)
+    const light = new THREE.PointLight('#00ffff', 1, 10)
+    light.position.set( x, y + 0.9, z + 0.3)
+
+    flashLight.add(support)
+    flashLight.add(bend)
+    flashLight.add(light)
+
+    return flashLight
+}
+
+function createFlashlights() {
+    const lights = new THREE.Object3D
+
+    lights.add(createFlashlight(-2, 1, -6))
+    lights.add(createFlashlight(2, 1, -6))
+    const light1 = createFlashlight(-1, 1, -8)
+    light1.rotation.y = -Math.PI * 0.5
+    lights.add(light1)
+    const light2 = createFlashlight(1, 1, -6)
+    light2.rotation.y = Math.PI * 0.5
+    lights.add(light2)
+
+    return lights
+}
+
 function createScene() {
     const scene = new THREE.Scene()
     scene.add(createGround())
     scene.add(createHouse())
     scene.add(createBush())
     scene.add(createFence())
+    scene.add(createFlashlights())
     return scene
 }
 
