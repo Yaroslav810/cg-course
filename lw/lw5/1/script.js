@@ -77,9 +77,13 @@ function getBushTexture() {
     return texture
 }
 
-function getFenceTexture() {
+function getFenceTexture(repeat) {
     const textureLoader = new THREE.TextureLoader()
-    return textureLoader.load('./assets/fence.jpg')
+    const texture = textureLoader.load('./assets/fence.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(repeat, repeat)
+    return texture
 }
 
 function getVerandaMaterialSettings() {
@@ -465,7 +469,7 @@ function createFence() {
     const frontFence = new THREE.Mesh(
         new THREE.BoxGeometry(2, 1, 1 / 16),
         new THREE.MeshPhongMaterial({
-            map: getFenceTexture(),
+            map: getFenceTexture(1),
             color: '#cc684a'
         })
     )
@@ -473,7 +477,7 @@ function createFence() {
     const leftFence = new THREE.Mesh(
         new THREE.BoxGeometry(1 / 16, 1, 6),
         new THREE.MeshPhongMaterial({
-            map: getFenceTexture(),
+            map: getFenceTexture(3),
             color: '#cc684a'
         })
     )
@@ -481,7 +485,7 @@ function createFence() {
     const backFence = new THREE.Mesh(
         new THREE.BoxGeometry(9, 1, 1 / 16),
         new THREE.MeshPhongMaterial({
-            map: getFenceTexture(),
+            map: getFenceTexture(10),
             color: '#cc684a'
         })
     )
@@ -489,7 +493,7 @@ function createFence() {
     const rightFence = new THREE.Mesh(
         new THREE.BoxGeometry(1 / 16, 1, 3.05),
         new THREE.MeshPhongMaterial({
-            map: getFenceTexture(),
+            map: getFenceTexture(2),
             color: '#cc684a'
         })
     )
