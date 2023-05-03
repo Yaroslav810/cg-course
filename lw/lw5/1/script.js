@@ -86,6 +86,15 @@ function getFenceTexture(repeat) {
     return texture
 }
 
+function getGraffitiTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/graffiti.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(1, 1)
+    return texture
+}
+
 function getVerandaMaterialSettings() {
     return {
         color: '#D5713F',
@@ -491,11 +500,19 @@ function createFence() {
     )
     backFence.position.set(0.5, 1 / 2, -4 - 1 / 16)
     const rightFence = new THREE.Mesh(
-        new THREE.BoxGeometry(1 / 16, 1, 3.05),
-        new THREE.MeshPhongMaterial({
-            map: getFenceTexture(2),
-            color: '#cc684a'
-        })
+        new THREE.BoxGeometry(1 / 16, 1, 3.08),
+        [
+            new THREE.MeshPhongMaterial({
+                map: getFenceTexture(2),
+                color: '#cc684a',
+                emissive: '#00ffff',
+                emissiveMap: getGraffitiTexture(),
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getFenceTexture(2),
+                color: '#cc684a',
+            })
+        ]
     )
     rightFence.position.set(5 - 1 / 32, 1 / 2, -2.5)
     fence.add(frontFence)
