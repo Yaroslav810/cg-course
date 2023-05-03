@@ -77,6 +77,11 @@ function getBushTexture() {
     return texture
 }
 
+function getFenceTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    return textureLoader.load('./assets/fence.jpg')
+}
+
 function getVerandaMaterialSettings() {
     return {
         color: '#D5713F',
@@ -455,6 +460,47 @@ function createPorch() {
     return porch
 }
 
+function createFence() {
+    const fence = new THREE.Object3D
+    const frontFence = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 1, 1 / 16),
+        new THREE.MeshPhongMaterial({
+            map: getFenceTexture(),
+            color: '#cc684a'
+        })
+    )
+    frontFence.position.set(-3, 1 / 2, 2 - 1 / 16)
+    const leftFence = new THREE.Mesh(
+        new THREE.BoxGeometry(1 / 16, 1, 6),
+        new THREE.MeshPhongMaterial({
+            map: getFenceTexture(),
+            color: '#cc684a'
+        })
+    )
+    leftFence.position.set(-4, 1 / 2, -1 - 1 / 16)
+    const backFence = new THREE.Mesh(
+        new THREE.BoxGeometry(9, 1, 1 / 16),
+        new THREE.MeshPhongMaterial({
+            map: getFenceTexture(),
+            color: '#cc684a'
+        })
+    )
+    backFence.position.set(0.5, 1 / 2, -4 - 1 / 16)
+    const rightFence = new THREE.Mesh(
+        new THREE.BoxGeometry(1 / 16, 1, 3.05),
+        new THREE.MeshPhongMaterial({
+            map: getFenceTexture(),
+            color: '#cc684a'
+        })
+    )
+    rightFence.position.set(5 - 1 / 32, 1 / 2, -2.5)
+    fence.add(frontFence)
+    fence.add(leftFence)
+    fence.add(backFence)
+    fence.add(rightFence)
+    return fence
+}
+
 function createHouse() {
     const house = new THREE.Group()
 
@@ -518,6 +564,7 @@ function createScene() {
     scene.add(createGround())
     scene.add(createHouse())
     scene.add(createBush())
+    scene.add(createFence())
     return scene
 }
 
