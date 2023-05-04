@@ -10,7 +10,7 @@ const fragmentShader = `
 void main() {
   float radius = 100.0;
   float width = 10.0;
-  vec3 center = vec3(1280.0 / 2.0, 720.0 / 2.0, 0.0);
+  vec3 center = vec3(500.0, 360.0, 0.0);
   vec3 position = vec3(gl_FragCoord) - center;
 
   if (length(position) <= radius - width || length(position) >= radius) 
