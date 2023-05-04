@@ -2,9 +2,9 @@ import * as THREE from 'three'
 import {OrbitControls} from "three/addons/controls/OrbitControls";
 
 const CAMERA = {
-    FOV: 3,
+    FOV: 60,
     MIN: 1,
-    MAX: 5000,
+    MAX: 1000,
 }
 
 function getHouseTexture() {
@@ -118,7 +118,7 @@ function createWall1() {
 
 function createWall2() {
     const wall = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 2, 3),
+        new THREE.BoxGeometry(3, 1.77, 3),
         new THREE.MeshPhongMaterial({
             map: getHouseTexture(),
             color: '#D5713F'
@@ -688,7 +688,7 @@ function init() {
     )
     const renderer = new THREE.WebGLRenderer()
     scene.background = getSkyTexture()
-    camera.position.set( 0, 15, 250 )
+    camera.position.set( 0, 15, 10 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     document.body.appendChild( renderer.domElement )
 
