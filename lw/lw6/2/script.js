@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 
 const CAMERA = {
-    FOV: 3,
+    FOV: 30,
     MIN: 1,
     MAX: 500,
 }
+// TODO: Добавить управление через uniform шейдерами
 const RADIUS = 100
 const WIDTH = 10
 
@@ -50,7 +51,7 @@ function init() {
         CAMERA.MAX
     )
     const renderer = new THREE.WebGLRenderer()
-    camera.position.set( 0, 0, 100 )
+    camera.position.set( 0, 0, 10 )
     renderer.setSize( window.innerWidth, window.innerHeight )
     renderer.setClearColor( 0xffffff, 1 )
     document.body.appendChild( renderer.domElement )
