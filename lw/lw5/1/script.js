@@ -118,13 +118,13 @@ function createWall1() {
 
 function createWall2() {
     const wall = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 1.77, 3),
+        new THREE.BoxGeometry(3, 1.9, 3),
         new THREE.MeshPhongMaterial({
             map: getHouseTexture(),
             color: '#D5713F'
         })
     )
-    wall.position.set(3.5, 2 / 2, 0.5)
+    wall.position.set(3.5, 1.9 / 2, 0.5)
     return wall
 }
 
