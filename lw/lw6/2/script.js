@@ -5,15 +5,15 @@ const CAMERA = {
     MIN: 1,
     MAX: 500,
 }
+const RADIUS = 100
+const WIDTH = 10
 
 const fragmentShader = `
 void main() {
-  float radius = 100.0;
-  float width = 10.0;
   vec3 center = vec3(500.0, 360.0, 0.0);
   vec3 position = vec3(gl_FragCoord) - center;
 
-  if (length(position) <= radius - width || length(position) >= radius) 
+  if (length(position) <= ${RADIUS - WIDTH}.0 || length(position) >= ${RADIUS}.0) 
   {
     gl_FragColor = vec4(0, 0, 0, 0);
   }
