@@ -17,7 +17,7 @@ void main() {
 
 const fragmentShader = `
 void main() {
-    gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+    gl_FragColor = vec4(0, 0, 1, 1);
 }`
 
 function createCannabis() {
@@ -37,7 +37,7 @@ function createCannabis() {
 }
 
 function animation(scene, camera, renderer) {
-    scene.add( createCannabis() )
+    scene.add(createCannabis())
 
     requestAnimationFrame(function animate() {
         renderer.render(scene, camera)
