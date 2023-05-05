@@ -3,7 +3,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls";
 
 const CAMERA = {
     FOV: 60,
-    MIN: 1,
+    MIN: 0.5,
     MAX: 1000,
 }
 
@@ -95,6 +95,15 @@ function getGraffitiTexture() {
     return texture
 }
 
+function getTestTexture() {
+    const textureLoader = new THREE.TextureLoader()
+    const texture = textureLoader.load('./assets/there.jpg')
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.offset.set(-0.7, 0.6)
+    return texture
+}
+
 function getVerandaMaterialSettings() {
     return {
         color: '#D5713F',
@@ -119,10 +128,34 @@ function createWall1() {
 function createWall2() {
     const wall = new THREE.Mesh(
         new THREE.BoxGeometry(3, 1.9, 3),
-        new THREE.MeshPhongMaterial({
-            map: getHouseTexture(),
-            color: '#D5713F'
-        })
+        [
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+                normalMap: getTestTexture(),
+                emissive: '#000000',
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+            }),
+            new THREE.MeshPhongMaterial({
+                map: getHouseTexture(),
+                color: '#D5713F',
+            }),
+        ]
     )
     wall.position.set(3.5, 1.9 / 2, 0.5)
     return wall
@@ -500,7 +533,7 @@ function createFence() {
     )
     backFence.position.set(0.5, 1 / 2, -4 - 1 / 16)
     const rightFence = new THREE.Mesh(
-        new THREE.BoxGeometry(1 / 16, 1, 3.08),
+        new THREE.BoxGeometry(1 / 16, 1, 3.06),
         [
             new THREE.MeshPhongMaterial({
                 map: getFenceTexture(2),
@@ -514,7 +547,7 @@ function createFence() {
             })
         ]
     )
-    rightFence.position.set(5 - 1 / 32, 1 / 2, -2.5)
+    rightFence.position.set(5 - 1 / 32, 1 / 2, -2.52)
     fence.add(frontFence)
     fence.add(leftFence)
     fence.add(backFence)
@@ -688,7 +721,7 @@ function init() {
     )
     const renderer = new THREE.WebGLRenderer()
     scene.background = getSkyTexture()
-    camera.position.set( 0, 15, 10 )
+    camera.position.set(0, 15, 10)
     renderer.setSize( window.innerWidth, window.innerHeight )
     document.body.appendChild( renderer.domElement )
 
