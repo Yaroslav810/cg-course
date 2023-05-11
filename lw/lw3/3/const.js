@@ -17,39 +17,39 @@ const LEVELS = {
     },
     2: {
         lines: 15,
-        speed: 35,
+        speed: 30,
     },
     3: {
         lines: 20,
-        speed: 35,
+        speed: 25,
     },
     4: {
         lines: 25,
-        speed: 35,
+        speed: 20,
     },
     5: {
         lines: 30,
-        speed: 35,
+        speed: 15,
     },
     6: {
         lines: 35,
-        speed: 35,
+        speed: 10,
     },
     7: {
         lines: 40,
-        speed: 35,
+        speed: 5,
     },
     8: {
         lines: 45,
-        speed: 35,
+        speed: 4,
     },
     9: {
         lines: 50,
-        speed: 35,
+        speed: 3,
     },
     10: {
         lines: 100,
-        speed: 35,
+        speed: 1,
     },
 }
 

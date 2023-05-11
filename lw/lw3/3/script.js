@@ -12,6 +12,7 @@ function initGame() {
     return {
         level: 1,
         linesLeft: LEVELS[1].lines,
+        speed: LEVELS[1].speed,
         playField: Array(HEIGHT).fill(0).map(() => Array(WIDTH).fill(0)),
         score: 0,
         currentTetramino: getNextTetromino(),
@@ -119,7 +120,7 @@ function drawGameOver(canvas, context, game) {
 }
 
 function update(context, game) {
-    if (++game.delay > 35) {
+    if (++game.delay > game.speed) {
         game.currentTetramino.row++
         game.delay = 0
 
@@ -195,6 +196,7 @@ function updateLevels(game, score) {
     if (game.linesLeft <= 0) {
         game.level++
         game.linesLeft = LEVELS[game.level].lines
+        game.speed = LEVELS[game.level].speed
     }
 }
 
