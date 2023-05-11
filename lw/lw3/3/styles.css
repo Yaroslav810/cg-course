@@ -1,0 +1,16 @@
+body {
+    background: #000000;
+}
+
+#title {
+    text-align: center;
+    font-family: helvetica, sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#canvas {
+    display: block;
+    width: 500px;
+    margin: 50px auto;
+}
