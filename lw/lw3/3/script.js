@@ -1,4 +1,4 @@
-import {BOX_SIZE, HEIGHT, LEVELS, SCORE, WIDTH} from './const.js'
+import {BONUS_COMPLETING_LEVEL, BOX_SIZE, HEIGHT, LEVELS, SCORE, WIDTH} from './const.js'
 import {getRandomTetramino} from './tetraminos.js'
 
 function initCanvas() {
@@ -190,14 +190,24 @@ function updateScore(game, score) {
 }
 
 function updateLevels(game, score) {
-    console.log(game.linesLeft, score)
     game.linesLeft -= score
-    console.log(game.linesLeft)
     if (game.linesLeft <= 0) {
         game.level++
         game.linesLeft = LEVELS[game.level].lines
         game.speed = LEVELS[game.level].speed
     }
+    let count = 0
+    game.playField.forEach((row, i) => {
+        let isEmpty = true
+        row.forEach((item, j) => {
+            if (item) {
+                isEmpty = false
+                game.playField[i][j] = 0
+            }
+        })
+        count += isEmpty
+    })
+    game.score += count * BONUS_COMPLETING_LEVEL
 }
 
 function updateStatistics(game, score) {

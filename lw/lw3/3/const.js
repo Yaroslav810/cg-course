@@ -53,6 +53,8 @@ const LEVELS = {
     },
 }
 
+const BONUS_COMPLETING_LEVEL = 10
+
 export {
     WIDTH,
     HEIGHT,
@@ -61,4 +63,5 @@ export {
 
     SCORE,
     LEVELS,
+    BONUS_COMPLETING_LEVEL,
 }
