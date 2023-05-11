@@ -214,7 +214,7 @@ function updateMove(game) {
     game.nextTetramino = getNextTetromino()
 }
 
-function drawPause(canvas, context, game) {
+function drawPause(canvas, context) {
     context.clearRect(0,0, canvas.width, canvas.height)
     context.fillStyle = '#ffffff'
     context.font = '18px serif'
@@ -238,7 +238,7 @@ function loop(canvas, context, game) {
             break
         }
         case 'pause': {
-            drawPause(canvas, context, game)
+            drawPause(canvas, context)
             break
         }
         default:
