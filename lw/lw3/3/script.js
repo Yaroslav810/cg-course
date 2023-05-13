@@ -195,19 +195,19 @@ function updateLevels(game, score) {
         game.level++
         game.linesLeft = LEVELS[game.level].lines
         game.speed = LEVELS[game.level].speed
-    }
-    let count = 0
-    game.playField.forEach((row, i) => {
-        let isEmpty = true
-        row.forEach((item, j) => {
-            if (item) {
-                isEmpty = false
-                game.playField[i][j] = 0
-            }
+        let count = 0
+        game.playField.forEach((row, i) => {
+            let isEmpty = true
+            row.forEach((item, j) => {
+                if (item) {
+                    isEmpty = false
+                    game.playField[i][j] = 0
+                }
+            })
+            count += isEmpty
         })
-        count += isEmpty
-    })
-    game.score += count * BONUS_COMPLETING_LEVEL
+        game.score += count * BONUS_COMPLETING_LEVEL
+    }
 }
 
 function updateStatistics(game, score) {

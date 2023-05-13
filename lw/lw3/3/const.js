@@ -12,43 +12,43 @@ const SCORE = {
 
 const LEVELS = {
     1: {
-        lines: 10,
-        speed: 35,
+        lines: 5,
+        speed: 40,
     },
     2: {
-        lines: 15,
+        lines: 5,
         speed: 30,
     },
     3: {
-        lines: 20,
-        speed: 25,
-    },
-    4: {
-        lines: 25,
+        lines: 10,
         speed: 20,
     },
-    5: {
-        lines: 30,
+    4: {
+        lines: 10,
         speed: 15,
     },
-    6: {
-        lines: 35,
+    5: {
+        lines: 15,
         speed: 10,
     },
-    7: {
-        lines: 40,
+    6: {
+        lines: 15,
         speed: 5,
     },
-    8: {
-        lines: 45,
+    7: {
+        lines: 20,
         speed: 4,
     },
-    9: {
-        lines: 50,
+    8: {
+        lines: 20,
         speed: 3,
     },
+    9: {
+        lines: 30,
+        speed: 2,
+    },
     10: {
-        lines: 100,
+        lines: 50,
         speed: 1,
     },
 }
