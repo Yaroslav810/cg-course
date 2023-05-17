@@ -5,16 +5,16 @@ const CAMERA = {
     MIN: 1,
     MAX: 500,
 }
-// TODO: Добавить управление через uniform шейдерами
-const RADIUS = 100
-const WIDTH = 10
 
 const fragmentShader = `
+uniform float radius;
+uniform float width;
+
 void main() {
   vec3 center = vec3(500.0, 360.0, 0.0);
   vec3 position = vec3(gl_FragCoord) - center;
 
-  if (length(position) <= ${RADIUS - WIDTH}.0 || length(position) >= ${RADIUS}.0) 
+  if (length(position) <= radius - width || length(position) >= radius) 
   {
     gl_FragColor = vec4(0, 0, 0, 0);
   }
@@ -27,6 +27,14 @@ void main() {
 function createStar() {
     const geometry = new THREE.PlaneGeometry(3, 3)
     const customShaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            radius: {
+                value: 100,
+            },
+            width: {
+                value: 10,
+            }
+        },
         fragmentShader,
     })
 
