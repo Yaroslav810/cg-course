@@ -95,11 +95,9 @@ function getGraffitiTexture() {
     return texture
 }
 
-function getTestTexture() {
+function getThereTexture() {
     const textureLoader = new THREE.TextureLoader()
     const texture = textureLoader.load('./assets/there.jpg')
-    texture.wrapS = THREE.RepeatWrapping
-    texture.wrapT = THREE.RepeatWrapping
     texture.offset.set(-0.7, 0.6)
     return texture
 }
@@ -132,7 +130,7 @@ function createWall2() {
             new THREE.MeshPhongMaterial({
                 map: getHouseTexture(),
                 color: '#D5713F',
-                normalMap: getTestTexture(),
+                normalMap: getThereTexture(),
                 emissive: '#000000',
             }),
             new THREE.MeshPhongMaterial({

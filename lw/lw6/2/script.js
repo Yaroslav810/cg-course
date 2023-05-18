@@ -24,6 +24,8 @@ void main() {
   }
 }`
 
+// TODO: moveStep
+
 function createStar() {
     const geometry = new THREE.PlaneGeometry(3, 3)
     const customShaderMaterial = new THREE.ShaderMaterial({
