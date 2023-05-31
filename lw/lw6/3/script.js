@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
-import {ParametricGeometry} from 'three/addons/geometries/ParametricGeometry.js'
 
 const CAMERA = {
     FOV: 30,
@@ -19,11 +18,11 @@ void main() {
   float hyperbolicZ = (position.x * position.x / (a * a) - position.y * position.y / (b * b)) / 2.0;
   float timeRatio = mod(time, transitionDuration) / transitionDuration;
   
-  float positionZ;
+  float z;
   if (mod(floor(time / transitionDuration), 2.0) == 0.0) {
-    positionZ = mix(ellipticalZ, hyperbolicZ, timeRatio);
+    z = mix(ellipticalZ, hyperbolicZ, timeRatio);
   } else {
-    positionZ = mix(hyperbolicZ, ellipticalZ, timeRatio);
+    z = mix(hyperbolicZ, ellipticalZ, timeRatio);
   }
 
   gl_Position = 
@@ -32,7 +31,7 @@ void main() {
     vec4(
         position.x, 
         position.y, 
-        positionZ, 
+        z, 
         1.0
     );
 }`

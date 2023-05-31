@@ -13,6 +13,7 @@ void main(void) {
         * (1.0 + 0.1 * cos(24.0 * aPosition.x)) 
         * (0.5 + 0.05 * cos(140.0 * aPosition.x));
     gl_Position = 
+        mat4(vec4(0.0, 1.0, 0.0, 0.0), vec4(1.0, 0.0, 0.0, 0.0), vec4(1.0, 1.0, 0.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0)) *
         mat4(vec4(0.4, 0.0, 0.0, 0.0), vec4(0.0, 0.4, 0.0, 0.0), vec4(0.0, 0.0, 1, 0.0), vec4(0.0, 0.0, 0.0, 1.0)) * 
         vec4(R * cos(aPosition.x), R * sin(aPosition.x), 0.0, 1.0);
 }`
